@@ -14,7 +14,7 @@ async function processImage(imageUrl: string) {
   );
 
   // Remove white background from individual images
-  const maskImage = await sharp(imageBuffer).negate().threshold(10).toBuffer();
+  const maskImage = await sharp(imageBuffer).threshold(253).negate().toBuffer();
 
   const processedImage = await sharp(imageBuffer)
     .joinChannel(maskImage)
@@ -23,9 +23,12 @@ async function processImage(imageUrl: string) {
   return processedImage;
 }
 
-const topImageUrl = "https://i.postimg.cc/15xL0NLj/t-shirt.avif";
-const bottomImageUrl = "https://i.postimg.cc/65dFMpK5/trouser.avif";
-const shoesImageUrl = "https://i.postimg.cc/xjNwbPFm/shoes.avif";
+const topImageUrl =
+  "https://images.stockx.com/images/Travis-Scott-Utopia-B1-Tee-White.jpg";
+const bottomImageUrl =
+  "https://images.stockx.com/images/Stussy-GORE-TEX-Over-Trouser-Magenta.jpg";
+const shoesImageUrl =
+  "https://images.stockx.com/360/Nike-Air-Humara-LX-Jacquemus-Pink-W/Images/Nike-Air-Humara-LX-Jacquemus-Pink-W/Lv2/img01.jpg";
 
 // Function to combine images
 async function combineImages() {
